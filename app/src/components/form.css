@@ -1,0 +1,22 @@
+.form {
+    display: block;
+    width: 260px;
+    margin: 85px auto;
+    padding: 50px 20px;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px 0 #b4b4b4;
+    border-radius: 30px;
+}
+
+.form>p {
+    margin: 0;
+    margin-bottom: 15px;
+    padding: 0;
+    text-align: center;
+    position: relative;
+    top: -20px;
+}
+
+.mb {
+    margin-bottom: 10px;
+}

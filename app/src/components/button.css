@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+2&display=swap');
+.btn {
+    display: block;
+    color: white;
+    background: #029ac9;
+    width: 100%;
+    height: 30px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-family: 'M PLUS 2', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.btn:focus-visible,
+.btn:hover {
+    background: #00789c;
+}
+
+.btn-disabled {
+    background: #a9c1c9;
+}
+
+.btn-disabled:focus-visible,
+.btn-disabled:hover {
+    background: #a9c1c9;
+}
