@@ -1,17 +1,18 @@
 import Button from "./Button";
 import InputField from "./InputField";
 import './form.css'
+import { useState } from "react";
 
 export default function LoginForm({ loginHandler, enabled }) {
 
-    let username = ''
-    let password = ''
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
 
     function submit() {
         if (enabled)
             loginHandler(
                 {
-                    username,
+                    login: username,
                     password
                 }
             );
@@ -20,8 +21,8 @@ export default function LoginForm({ loginHandler, enabled }) {
     return (
         <form className='form'>
             <p>Вход</p>
-            <InputField type='text' placeholder='Имя пользователя' changeHandler={(uname) => username = uname} />
-            <InputField className='mb' type='password' placeholder='Пароль' changeHandler={(passwd) => password = passwd} />
+            <InputField type='text' placeholder='Имя пользователя' changeHandler={(uname) => setUsername(uname)} />
+            <InputField className='mb' type='password' placeholder='Пароль' changeHandler={(passwd) => setPassword(passwd)} />
             <Button caption='Войти' clickHandler={() => submit()} enabled={enabled} />
         </form>
     );
