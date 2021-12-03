@@ -1,9 +1,11 @@
 import { Route, Routes } from 'react-router';
 import './App.css';
 import About from './pages/About';
+import Lessons from './pages/Lessons';
 import Login from './pages/Login';
 import Main from './pages/Main';
 import NotFound from './pages/NotFound';
+import Students from './pages/Students';
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
         <Route index element={<Main />} />
         <Route path="/about" element={<About />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/lessons' element={<Lessons />} />
+        <Route path='/students' element={<Students />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

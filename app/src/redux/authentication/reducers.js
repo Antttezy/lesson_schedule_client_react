@@ -3,7 +3,8 @@ import { AUTHENTICATION } from "./constants"
 const initialState = {
     isLoggedIn: false,
     accessToken: null,
-    refreshToken: null
+    refreshToken: null,
+    role: null
 }
 
 export const authenticationReducer = (state = initialState, action) => {
@@ -13,7 +14,8 @@ export const authenticationReducer = (state = initialState, action) => {
                 ...state,
                 isLoggedIn: true,
                 accessToken: action.payload.accessToken,
-                refreshToken: action.payload.refreshToken
+                refreshToken: action.payload.refreshToken,
+                role: action.payload.role
             }
 
         case AUTHENTICATION.LOGOUT:
@@ -21,7 +23,14 @@ export const authenticationReducer = (state = initialState, action) => {
                 ...state,
                 isLoggedIn: false,
                 accessToken: null,
-                refreshToken: null
+                refreshToken: null,
+                role: null
+            }
+
+        case AUTHENTICATION.UPDATE_ACCESS:
+            return {
+                ...state,
+                accessToken: action.payload
             }
 
         default:

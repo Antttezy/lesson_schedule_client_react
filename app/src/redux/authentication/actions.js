@@ -12,3 +12,10 @@ export const Logout = () => {
         type: AUTHENTICATION.LOGOUT
     }
 }
+
+export const UpdateAccessToken = (accessToken) => {
+    return {
+        type: AUTHENTICATION.UPDATE_ACCESS,
+        payload: accessToken
+    }
+}

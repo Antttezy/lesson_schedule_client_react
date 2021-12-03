@@ -6,7 +6,7 @@ export async function login(request) {
     try {
         let response = await axios.post(`${authenticationUrl}/login`, request)
         return response.data
-    } catch(error) {
+    } catch (error) {
         throw {
             message: 'Wrong login or password'
         }
@@ -15,8 +15,19 @@ export async function login(request) {
 
 export async function logout(request) {
     try {
-        let response = await axios.post(`${authenticationUrl}/logout`, request)
-    } catch(error) {
+        await axios.post(`${authenticationUrl}/logout`, request)
+    } catch (error) {
+        throw error;
+    }
+}
+
+export async function getAccessToken(refreshToken) {
+    try {
+        let response = await axios.post(`${authenticationUrl}/refresh`, {
+            refreshToken
+        })
+        return response.data.accessToken
+    } catch (error) {
         throw error;
     }
 }
