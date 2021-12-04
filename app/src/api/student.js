@@ -54,3 +54,26 @@ export async function listStudents(accessToken, page, searchPattern) {
         throw error
     }
 }
+
+export async function setStudentGroup(accessToken, groupId, studentId) {
+    try {
+        let response = await axios.post(`${applicationUrl}/groups/addStudent`, {
+            groupId,
+            studentId,
+        },
+        {
+            headers: {
+                authorization: `Bearer ${accessToken}`
+            }
+        })
+
+        if (!response.data.isOk){
+            throw response.data.errors
+        }
+
+        return response.data
+
+    } catch (e) {
+        throw e
+    }
+}

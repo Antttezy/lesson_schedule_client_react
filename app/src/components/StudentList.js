@@ -1,5 +1,5 @@
 
-export default function StudentList({ students, isLoaded }) {
+export default function StudentList({ students, isLoaded, selectStudentHandler }) {
     if (!isLoaded) {
         return <p>Загрузка...</p>
     }
@@ -11,7 +11,7 @@ export default function StudentList({ students, isLoaded }) {
     return (
         <ul>
             {students.map(st =>
-                <li key={st.id}>{st.secondName} {st.firstName} {st.groupName ?? 'Нет группы'} <button >Сменить группу</button></li>
+                <li key={st.id}>{st.secondName} {st.firstName} {st.groupName ?? 'Нет группы'} <button onClick={_ => selectStudentHandler(st.id)}>Сменить группу</button></li>
             )}
         </ul>
     )

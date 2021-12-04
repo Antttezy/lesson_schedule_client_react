@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router";
 import { getAccessToken } from "../api/authentication";
-import { listStudents } from "../api/student";
+import { listStudents, setStudentGroup } from "../api/student";
 import Navbar from "../components/Navbar";
 import PagingBar from "../components/PagingBar";
+import SetStudentGroup from "../components/SetStudentGroup";
 import StudentList from "../components/StudentList";
 import { UpdateAccessToken } from "../redux/authentication/actions";
 import { ROLES } from "../redux/authentication/constants";
@@ -16,6 +17,9 @@ export default function Students() {
     const [loaded, setLoaded] = useState(false)
     const [page, setPage] = useState(1)
     const [pageCount, setPageCount] = useState(0)
+
+    const [selectedStudent, setSelectedStudent] = useState(-1)
+    const [selectGroup, setSelectGroup] = useState(false)
 
     async function fetchStudents() {
         async function fetch(accessToken) {
@@ -52,12 +56,44 @@ export default function Students() {
         setPage(p => i)
     }
 
+    function selectStudent(id) {
+        setSelectedStudent(_ => id)
+        setSelectGroup(_ => true)
+    }
+
+    async function confirmSetGroup(groupId, studentId) {
+        try {
+            await setStudentGroup(authentication.accessToken, groupId, studentId)
+
+        } catch (err) {
+            try {
+                let newAccessToken = await getAccessToken(authentication.refreshToken)
+                dispatch(UpdateAccessToken(newAccessToken))
+                await setStudentGroup(newAccessToken, groupId, studentId)
+
+            } catch (e) {
+
+            }
+        }
+
+        await fetchStudents()
+    }
+
+    async function setStudentGroupHandler(args) {
+        if (args.confirm) {
+            await confirmSetGroup(args.selected, selectedStudent)
+        }
+
+        setSelectGroup(_ => false)
+    }
+
     return (
         authentication.isLoggedIn ?
             authentication.role === ROLES.TEACHER ?
                 <>
                     <Navbar />
-                    <StudentList students={students} isLoaded={loaded} />
+                    {selectGroup ? <SetStudentGroup onGroupSelected={i => setStudentGroupHandler(i)} /> : null}
+                    <StudentList students={students} isLoaded={loaded} selectStudentHandler={selectStudent}/>
                     <PagingBar pageCount={pageCount} pageChangedHandler={(i) => changePage(i)} />
                 </> :
                 <Navigate to='/' /> :
