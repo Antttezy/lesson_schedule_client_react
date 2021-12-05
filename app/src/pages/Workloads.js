@@ -6,7 +6,9 @@ import { listWorkloads } from "../api/workloads";
 import Navbar from "../components/Navbar";
 import { UpdateAccessToken } from "../redux/authentication/actions";
 import { ROLES } from "../redux/authentication/constants";
+import { CreateWorkload } from "./CreateWorkload";
 import NotFound from "./NotFound";
+import PagingBar from "../components/PagingBar";
 
 function PageRoot() {
     const authentication = useSelector(store => store.authenticationReducer)
@@ -49,6 +51,10 @@ function PageRoot() {
         fetchWorkloads(),
         [page])
 
+    function changePage(i) {
+        setPage(_ => i)
+    }
+
     function createClick(e) {
         setCreate(_ => true)
     }
@@ -66,7 +72,18 @@ function PageRoot() {
             <div>
                 <button onClick={createClick}>Создать</button>
             </div>
-            JSON.stringify(workloads)
+            <div>
+                <ul>
+                    {workloads.map(w =>
+                        <li key={w.id}>
+                            <p>{w.description} ({w.subject.name}) - {w.hours} часов</p>
+                        </li>
+                    )}
+                </ul>
+            </div>
+            <div>
+                <PagingBar pageCount={pageCount} pageChangedHandler={(i) => changePage(i)} />
+            </div>
         </>
     )
 }
@@ -87,7 +104,7 @@ export default function Workloads() {
             <Navbar />
             <Routes>
                 <Route path='/' element={<PageRoot />} />
-                <Route path='create' element={<></>} />
+                <Route path='create' element={<CreateWorkload />} />
                 <Route path='*' element={<NotFound />} />
             </Routes>
         </>

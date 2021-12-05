@@ -67,3 +67,41 @@ export async function createGroup(accessToken, group) {
         }
     }
 }
+
+export async function addWorkloadToGroup(accessToken, parameters) {
+    try {
+        let response = await axios.post(`${applicationUrl}/groups/addWorkload`, parameters, {
+            headers: {
+                authorization: `Bearer ${accessToken}`
+            }
+        })
+
+        if (!response.data.isOk) {
+            throw response.data
+        }
+
+        return response.data
+
+    } catch(e) {
+        throw e
+    }
+}
+
+export async function removeWorkloadFromGroup(accessToken, parameters) {
+    try {
+        let response = await axios.post(`${applicationUrl}/groups/removeWorkload`, parameters, {
+            headers: {
+                authorization: `Bearer ${accessToken}`
+            }
+        })
+
+        if (!response.data.isOk) {
+            throw response.data
+        }
+
+        return response.data
+
+    } catch(e) {
+        throw e
+    }
+}

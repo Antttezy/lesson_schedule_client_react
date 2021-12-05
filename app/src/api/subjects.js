@@ -2,37 +2,9 @@ import axios from "axios"
 
 const applicationUrl = process.env.REACT_APP_APPLICATION_URL
 
-export async function listWorkloads(accessToken, page) {
-    let request = `${applicationUrl}/workloads`
-
-    if (page) {
-        request += `?page=${page}`
-    }
-
+export async function listSubjects(accessToken) {
     try {
-
-        let response = await axios.get(request, {
-            headers: {
-                authorization: `Bearer ${accessToken}`
-            }
-        })
-
-        console.log(response.data)
-
-        if (!response.data.isOk) {
-            throw response
-        }
-
-        return response.data
-
-    } catch (err) {
-        throw err
-    }
-}
-
-export async function createWorkload(accessToken, workload) {
-    try {
-        let response = await axios.post(`${applicationUrl}/workloads/create`, workload, {
+        let response = await axios.get(`${applicationUrl}/subjects`, {
             headers: {
                 authorization: `Bearer ${accessToken}`
             }
@@ -44,7 +16,26 @@ export async function createWorkload(accessToken, workload) {
 
         return response.data
 
-    } catch (e) {
-        throw e
+    } catch (err) {
+        throw err
+    }
+}
+
+export async function createSubject(accessToken, subject) {
+    try {
+        let response = await axios.post(`${applicationUrl}/subjects/create`, subject, {
+            headers: {
+                authorization: `Bearer ${accessToken}`
+            }
+        })
+
+        if (!response.data.isOk) {
+            throw response.data
+        }
+
+        return response.data
+
+    } catch (err) {
+        throw err
     }
 }

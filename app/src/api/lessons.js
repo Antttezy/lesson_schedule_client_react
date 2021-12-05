@@ -32,3 +32,22 @@ export async function getMyLessons(accessToken, beginTime, endTime) {
         throw error;
     }
 }
+
+export async function getLessons(accessToken, beginTime, endTime) {
+    try {
+        let response = await axios.get(`${applicationUrl}/lessons?begin=${beginTime}&end=${endTime}`, {
+            headers: {
+                authorization: `Bearer ${accessToken}`
+            }
+        })
+
+        if (!response.data.isOk) {
+            throw response.data
+        }
+
+        return response.data
+
+    } catch (e) {
+        throw e
+    }
+}

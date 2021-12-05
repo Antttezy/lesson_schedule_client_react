@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Navigate, Route, Routes } from "react-router"
 import { getAccessToken } from "../api/authentication"
 import { getGroups } from "../api/groups"
+import EditGroup from "../components/EditGroup"
 import GroupView from "../components/GroupView"
 import Navbar from "../components/Navbar"
 import { UpdateAccessToken } from "../redux/authentication/actions"
@@ -88,6 +89,7 @@ export default function Groups() {
             <Routes>
                 <Route path='/' element={<PageRoot />} />
                 <Route path='create' element={<CreateGroup />} />
+                <Route path=':groupId/edit' element={<EditGroup />} />
                 <Route path='*' element={<NotFound />} />
             </Routes>
         </>

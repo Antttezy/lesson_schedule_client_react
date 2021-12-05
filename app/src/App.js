@@ -6,6 +6,7 @@ import Lessons from './pages/Lessons';
 import Login from './pages/Login';
 import Main from './pages/Main';
 import NotFound from './pages/NotFound';
+import Schedule from './pages/Schedule';
 import Students from './pages/Students';
 import Workloads from './pages/Workloads';
 
@@ -19,6 +20,7 @@ function App() {
         <Route path='/lessons' element={<Lessons />} />
         <Route path='/students' element={<Students />} />
         <Route path='/groups/*' element={<Groups />} />
+        <Route path='/schedule/*' element={<Schedule />} />
         <Route path='/workloads/*' element={<Workloads />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
