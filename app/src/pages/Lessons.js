@@ -11,10 +11,13 @@ import { UpdateAccessToken } from "../redux/authentication/actions"
 import { ROLES } from "../redux/authentication/constants"
 
 export default function Lessons() {
-    var date = new Date()
-    date.setDate(date.setDate() + 1)
-    const [beginTime, setBeginTime] = useState(-1)
-    const [endTime, setEndTime] = useState(-1)
+    let beginDate = new Date()
+    let endDate = new Date()
+    endDate.setDate(endDate.getDate() + 1)
+    beginDate.setDate(beginDate.getDate() - 1)
+
+    const [beginTime, setBeginTime] = useState(beginDate.getTime())
+    const [endTime, setEndTime] = useState(endDate.getTime())
     const [lessons, setLessons] = useState([])
     const [lessonsLoaded, setLessonsLoaded] = useState(false)
     const authentication = useSelector(store => store.authenticationReducer)
@@ -78,7 +81,7 @@ export default function Lessons() {
                 <InputField type='date' className='' changeHandler={(dt) => changeBeginTime(dt)} />
                 <InputField type='date' className='' changeHandler={(dt) => changeEndTime(dt)} />
                 <Button caption='Поиск по дате' enabled={true} clickHandler={() => searchLessons()} />
-                <LessonsList lessons={lessons} loaded={lessonsLoaded} /> :
+                <LessonsList lessons={lessons} loaded={lessonsLoaded} />
             </> :
             <Navigate to='/' />
             : <Navigate to='/login' />

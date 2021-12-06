@@ -35,7 +35,26 @@ export async function getMyLessons(accessToken, beginTime, endTime) {
 
 export async function getLessons(accessToken, beginTime, endTime) {
     try {
-        let response = await axios.get(`${applicationUrl}/lessons?begin=${beginTime}&end=${endTime}`, {
+        let response = await axios.get(`${applicationUrl}/lessons?start=${beginTime}&end=${endTime}`, {
+            headers: {
+                authorization: `Bearer ${accessToken}`
+            }
+        })
+
+        if (!response.data.isOk) {
+            throw response.data
+        }
+
+        return response.data
+
+    } catch (e) {
+        throw e
+    }
+}
+
+export async function createLesson(accessToken, lesson) {
+    try {
+        let response = await axios.post(`${applicationUrl}/lessons/create`, lesson, {
             headers: {
                 authorization: `Bearer ${accessToken}`
             }

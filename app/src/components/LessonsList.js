@@ -7,7 +7,7 @@ export default function LessonsList({ lessons, loaded }) {
                 <ul>
                     {lessons.map(lesson =>
                         <ul key={lesson.id}>
-                            {lesson.lessonTime} {lesson.workload.subject.name}, {lesson.teacher.secondName} {lesson.teacher.firstName[0]}
+                            {new Date(`${lesson.lessonTime.replace('T', ' ')} UTC`).toLocaleString()} {lesson.workload.subject.name}, {lesson.teacher.secondName} {lesson.teacher.firstName[0]}
                         </ul>)}
                 </ul> :
                 <span>В выбранные дни нет уроков</span>

@@ -12,14 +12,16 @@ import { ROLES } from "../redux/authentication/constants"
 import CreateLesson from "./CreateLesson"
 
 function RootPage() {
-    var date = new Date()
-    date.setDate(date.setDate() + 1)
+    let beginDate = new Date()
+    let endDate = new Date()
+    endDate.setDate(endDate.getDate() + 1)
+    beginDate.setDate(beginDate.getDate() - 1)
 
     const authentication = useSelector(store => store.authenticationReducer)
     const dispatch = useDispatch()
 
-    const [beginTime, setBeginTime] = useState(-1)
-    const [endTime, setEndTime] = useState(-1)
+    const [beginTime, setBeginTime] = useState(beginDate.getTime())
+    const [endTime, setEndTime] = useState(endDate.getTime())
 
     const [lessons, setLessons] = useState([])
     const [lessonsLoaded, setLessonsLoaded] = useState(false)

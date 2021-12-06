@@ -6,7 +6,7 @@ export async function listWorkloads(accessToken, page) {
     let request = `${applicationUrl}/workloads`
 
     if (page) {
-        request += `?page=${page}`
+        request += `/page/${page}`
     }
 
     try {
@@ -16,8 +16,6 @@ export async function listWorkloads(accessToken, page) {
                 authorization: `Bearer ${accessToken}`
             }
         })
-
-        console.log(response.data)
 
         if (!response.data.isOk) {
             throw response
