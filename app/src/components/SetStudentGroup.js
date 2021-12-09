@@ -37,6 +37,7 @@ export default function SetStudentGroup({ onGroupSelected }) {
     useEffect(() => {
         fetchGroups()
     },
+        // eslint-disable-next-line
         [])
 
     if (!loaded) {
@@ -63,7 +64,7 @@ export default function SetStudentGroup({ onGroupSelected }) {
         if (isSuccess) {
             onGroupSelected({
                 confirm: true,
-                selected: selected != 0 ? selected : null
+                selected: selected !== 0 ? selected : null
             })
         }
     }

@@ -50,7 +50,7 @@ export default function Lessons() {
 
         try {
             await fetch(authentication.accessToken)
-            
+
         } catch (error) {
             try {
                 let newAccessToken = await getAccessToken(authentication.refreshToken)
@@ -71,19 +71,20 @@ export default function Lessons() {
         () => {
             fetchLessons()
         },
+        // eslint-disable-next-line
         [])
 
     return (
         authentication.isLoggedIn === true ?
-        authentication.role === ROLES.STUDENT ?
-            <>
-                <Navbar />
-                <InputField type='date' className='' changeHandler={(dt) => changeBeginTime(dt)} />
-                <InputField type='date' className='' changeHandler={(dt) => changeEndTime(dt)} />
-                <Button caption='Поиск по дате' enabled={true} clickHandler={() => searchLessons()} />
-                <LessonsList lessons={lessons} loaded={lessonsLoaded} />
-            </> :
-            <Navigate to='/' />
+            authentication.role === ROLES.STUDENT ?
+                <>
+                    <Navbar />
+                    <InputField type='date' className='' changeHandler={(dt) => changeBeginTime(dt)} />
+                    <InputField type='date' className='' changeHandler={(dt) => changeEndTime(dt)} />
+                    <Button caption='Поиск по дате' enabled={true} clickHandler={() => searchLessons()} />
+                    <LessonsList lessons={lessons} loaded={lessonsLoaded} />
+                </> :
+                <Navigate to='/' />
             : <Navigate to='/login' />
     );
 }

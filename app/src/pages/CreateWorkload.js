@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router";
 import { getAccessToken } from "../api/authentication";
 import { createSubject, listSubjects } from "../api/subjects";
-import { createWorkload, createWorkload as f } from "../api/workloads";
+import { createWorkload } from "../api/workloads";
 import { UpdateAccessToken } from "../redux/authentication/actions";
 
 export function CreateWorkload() {
@@ -90,6 +90,7 @@ export function CreateWorkload() {
 
     useEffect(() =>
         fetchSubjects(),
+        // eslint-disable-next-line
         [])
 
     async function subjectCreate() {

@@ -50,6 +50,7 @@ export default function Students() {
 
     useEffect(() =>
         fetchStudents(),
+        // eslint-disable-next-line
         [page])
 
     function changePage(i) {
@@ -93,7 +94,7 @@ export default function Students() {
                 <>
                     <Navbar />
                     {selectGroup ? <SetStudentGroup onGroupSelected={i => setStudentGroupHandler(i)} /> : null}
-                    <StudentList students={students} isLoaded={loaded} selectStudentHandler={selectStudent}/>
+                    <StudentList students={students} isLoaded={loaded} selectStudentHandler={selectStudent} />
                     <PagingBar pageCount={pageCount} pageChangedHandler={(i) => changePage(i)} />
                 </> :
                 <Navigate to='/' /> :

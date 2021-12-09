@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Navigate, Route, Router, Routes } from "react-router"
+import { Navigate, Route, Routes } from "react-router"
 import { getAccessToken } from "../api/authentication"
 import { getLessons } from "../api/lessons"
 import Button from "../components/Button"
@@ -73,6 +73,7 @@ function RootPage() {
         () => {
             fetchLessons()
         },
+        // eslint-disable-next-line
         [])
 
     if (create) {

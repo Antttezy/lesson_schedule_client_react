@@ -67,6 +67,7 @@ export default function Navbar() {
         () => {
             fetchAccount(authentication.isLoggedIn)
         },
+        // eslint-disable-next-line
         [authentication.isLoggedIn])
 
     return (

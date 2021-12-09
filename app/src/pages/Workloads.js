@@ -49,6 +49,7 @@ function PageRoot() {
 
     useEffect(() =>
         fetchWorkloads(),
+        // eslint-disable-next-line
         [page])
 
     function changePage(i) {

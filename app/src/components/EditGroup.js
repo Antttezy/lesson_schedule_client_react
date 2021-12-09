@@ -71,10 +71,12 @@ export default function EditGroup() {
 
     useEffect(() =>
         fetchGroupInfo(),
+        // eslint-disable-next-line
         [])
 
     useEffect(() =>
         fetchWorkloads(),
+        // eslint-disable-next-line
         [page])
 
     function changePage(i) {
@@ -129,7 +131,7 @@ export default function EditGroup() {
         <div>
             <div>
                 {workloads.map(w => {
-                    const active = groupInfo.workloads.some(w_sel => w.id == w_sel.id)
+                    const active = groupInfo.workloads.some(w_sel => w.id === w_sel.id)
 
                     return (
                         <div key={w.id}>

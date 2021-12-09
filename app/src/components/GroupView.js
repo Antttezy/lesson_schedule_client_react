@@ -39,6 +39,7 @@ export default function GroupView({ groupId, groupName }) {
 
     useEffect(() =>
         fetchGroup(),
+        // eslint-disable-next-line
         [])
 
         if (edit) {

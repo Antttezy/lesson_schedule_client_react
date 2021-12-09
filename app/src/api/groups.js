@@ -62,6 +62,7 @@ export async function createGroup(accessToken, group) {
             throw err
         }
 
+        // eslint-disable-next-line
         throw {
             unauthorized: true
         }

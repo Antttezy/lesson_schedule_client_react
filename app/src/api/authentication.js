@@ -7,6 +7,7 @@ export async function login(request) {
         let response = await axios.post(`${authenticationUrl}/login`, request)
         return response.data
     } catch (error) {
+        // eslint-disable-next-line
         throw {
             message: 'Wrong login or password'
         }

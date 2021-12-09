@@ -45,6 +45,7 @@ function PageRoot() {
     useEffect(() => {
         fetchGroups()
     },
+        // eslint-disable-next-line
         [])
 
     function redirectToCreate() {

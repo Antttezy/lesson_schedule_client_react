@@ -44,7 +44,7 @@ export default function CreateLesson() {
         const datetime = new Date(`${date} ${time}`).getTime()
 
         try {
-            let response = await createLesson(authentication.accessToken, {
+            await createLesson(authentication.accessToken, {
                 workloadId: workload,
                 groupId: group,
                 lessonTime: datetime
@@ -55,7 +55,7 @@ export default function CreateLesson() {
             try {
                 const newToken = await getAccessToken(authentication.refreshToken)
                 dispatch(UpdateAccessToken(newToken))
-                let response = await createLesson(authentication.accessToken, {
+                await createLesson(authentication.accessToken, {
                     workloadId: workload,
                     groupId: group,
                     lessonTime: datetime
@@ -112,6 +112,7 @@ export default function CreateLesson() {
         fetchGroups()
         fetchWorkloads()
     },
+        // eslint-disable-next-line
         [])
 
     function groupChanged(e) {
