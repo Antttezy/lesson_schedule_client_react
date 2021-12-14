@@ -1,3 +1,4 @@
+import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router';
 import './App.css';
 import About from './pages/About';
@@ -9,8 +10,25 @@ import NotFound from './pages/NotFound';
 import Schedule from './pages/Schedule';
 import Students from './pages/Students';
 import Workloads from './pages/Workloads';
+import { Login as login } from './redux/authentication/actions'
 
 function App() {
+  const dispatch = useDispatch()
+
+  const isLogged = localStorage.getItem("isLogged")
+  console.log(isLogged)
+
+  if (isLogged) {
+    const refreshToken = localStorage.getItem("token")
+    const role = localStorage.getItem("role")
+
+    dispatch(login({
+      accessToken: null,
+      refreshToken,
+      role
+    }))
+  }
+
   return (
     <div className="App">
       <Routes>

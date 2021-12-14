@@ -17,6 +17,9 @@ export default function Login() {
         try {
             let response = await loginRequest(loginBody)
             dispatch(setlogin(response))
+            localStorage.setItem("isLogged", true)
+            localStorage.setItem("token", response.refreshToken)
+            localStorage.setItem("role", response.role)
             setRedirect(r => true)
         } catch (error) {
             console.log(error.message)
